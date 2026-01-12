@@ -6,6 +6,7 @@ export default function VerificationCodeNewAcount() {
   const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const [pop, setPop] = useState(false);
+  const [active, setActive] = useState(false);
   const inputsRef = useRef([]);
 
   // ✅ عند ظهور الـ popup، بعد 10 ثواني يرجع المستخدم
@@ -19,35 +20,37 @@ export default function VerificationCodeNewAcount() {
     }
   }, [pop, navigate]);
 
+  // ✅ عند إدخال الأرقام
   const handleChange = (e, index) => {
     const value = e.target.value;
+
     if (/^[0-9]?$/.test(value)) {
       e.target.value = value;
-      if (value && index < 5) {
-        inputsRef.current[index + 1].focus();
-      }
+
+      if (value && index < 5) inputsRef.current[index + 1].focus();
+
+      // تحقق إذا تم إدخال 6 أرقام كاملة
+      const code = inputsRef.current.map((input) => input.value).join("");
+      setActive(code.length === 6);
     } else {
       e.target.value = "";
     }
   };
 
+  // ✅ Backspace للرجوع للخانة السابقة
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !e.target.value && index > 0) {
       inputsRef.current[index - 1].focus();
     }
   };
 
-  // ✅ دالة إرسال الكود للسيرفر
+  // ✅ إرسال الكود والتحقق
   const handleVerify = async () => {
+    if (!active) return; // لو الكود مش كامل، ما تعملش أي حاجة
+
     setClick(true);
 
     const code = inputsRef.current.map((input) => input.value).join("");
-
-    if (code.length !== 6) {
-      alert("Please enter all 6 digits");
-      setClick(false);
-      return;
-    }
 
     try {
       const response = await fetch("http://localhost:5000/api/verify-code", {
@@ -72,7 +75,6 @@ export default function VerificationCodeNewAcount() {
   return (
     <div
       style={{
-        margin: "0px",
         position: "fixed",
         top: "0px",
         left: "0px",
@@ -87,7 +89,7 @@ export default function VerificationCodeNewAcount() {
         backgroundPosition: "center",
       }}
     >
-      {/* ✅ Popup عند نجاح الإرسال */}
+      {/* ✅ Popup عند نجاح التحقق */}
       {pop && (
         <div
           style={{
@@ -165,8 +167,8 @@ export default function VerificationCodeNewAcount() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "70%",
+          width: "781px",
+          height: "637px",
           padding: "40px 33px",
           background: "#fff",
           borderRadius: "10px",
@@ -221,7 +223,7 @@ export default function VerificationCodeNewAcount() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: "10px",
+            gap: "60px",
             marginTop: "20px",
             marginBottom: "20px",
           }}
@@ -232,16 +234,14 @@ export default function VerificationCodeNewAcount() {
               type="text"
               maxLength="1"
               style={{
-                width: "45px",
-                height: "55px",
+                width: "40px",
+                height: "50px",
                 textAlign: "center",
-                fontSize: "22px",
+                fontSize: "24px",
                 fontWeight: "600",
-                border: "1px solid #8d8989",
+                border: "2px solid #8d8989ff",
                 borderRadius: "8px",
                 outline: "none",
-                margin: "10px",
-                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
               }}
               ref={(el) => (inputsRef.current[index] = el)}
               onChange={(e) => handleChange(e, index)}
@@ -250,10 +250,11 @@ export default function VerificationCodeNewAcount() {
           ))}
         </div>
 
+        {/* ✅ زر الإرسال */}
         <button
           type="submit"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -263,11 +264,12 @@ export default function VerificationCodeNewAcount() {
             lineHeight: "24px",
             borderRadius: "5px",
             color: "#fff",
-            background: click ? "#E22023" : "rgba(0,0,0,0.5)",
-            cursor: "pointer",
+            background: active ? "#E22023" : "rgba(0,0,0,0.5)",
+            cursor: active ? "pointer" : "not-allowed",
             transition: "background 0.25s ease",
           }}
           onClick={handleVerify}
+          disabled={!active}
         >
           Send Code
         </button>

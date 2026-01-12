@@ -1,11 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function NewBassword() {
   const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+
+
+  const [activ , setActive]=useState(false)
+ 
+  useEffect(() => {
+    // لما المستخدم يكتب إيميل وباسورد الاتنين مش فاضيين
+    if (email !== "" && password !== "" ) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [email, password ]);
+
+
+
+
 
   const handleSubmit = async () => {
     setClick(true);
@@ -55,8 +74,8 @@ export default function NewBassword() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "70%",
+          width: "781px",
+          height: "659px",
           padding: "40px 33px",
           background: "#fff",
           borderRadius: "8px",
@@ -104,7 +123,7 @@ export default function NewBassword() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
             marginTop: "10px",
@@ -123,7 +142,7 @@ export default function NewBassword() {
             id="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
           />
         </div>
 
@@ -132,7 +151,7 @@ export default function NewBassword() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
           }}
         >
@@ -148,14 +167,14 @@ export default function NewBassword() {
             id="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
           />
         </div>
 
         <button
           type="submit"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -164,7 +183,7 @@ export default function NewBassword() {
             fontSize: "16px",
             fontWeight: "500",
             color: "#fff",
-            background: click ? "#E22023" : "rgba(0,0,0,0.5)",
+            background: activ ? "#E22023" : "rgba(0,0,0,0.5)",
           }}
           onClick={handleSubmit}
         >

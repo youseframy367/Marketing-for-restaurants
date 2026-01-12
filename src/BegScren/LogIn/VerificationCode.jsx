@@ -5,13 +5,21 @@ export default function VerificationCode() {
   const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const inputsRef = useRef([]);
+  const [active, setActive] = useState(false);
 
   // ✅ تحديث الخانات
   const handleChange = (e, index) => {
     const value = e.target.value;
+
     if (/^[0-9]?$/.test(value)) {
       e.target.value = value;
+
+      // التحرك للخانة التالية تلقائيًا
       if (value && index < 5) inputsRef.current[index + 1].focus();
+
+      // ✅ تحقق من إذا كل الخانات مليانة
+      const code = inputsRef.current.map((input) => input.value).join("");
+      setActive(code.length === 6);
     } else {
       e.target.value = "";
     }
@@ -60,10 +68,9 @@ export default function VerificationCode() {
   return (
     <div
       style={{
-        margin: "0px",
         position: "fixed",
-        top: "0px",
-        left: "0px",
+        top: "0",
+        left: "0",
         height: "100%",
         width: "100%",
         display: "flex",
@@ -71,6 +78,7 @@ export default function VerificationCode() {
         justifyContent: "center",
         alignItems: "center",
         backgroundImage: `url('/imgBegScren/OTB.png')`,
+        backgroundSize: "cover",
       }}
     >
       <div
@@ -78,8 +86,8 @@ export default function VerificationCode() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "70%",
+          width: "781px",
+          height: "637px",
           padding: "40px 33px",
           background: "#fff",
           borderRadius: "8px",
@@ -134,7 +142,7 @@ export default function VerificationCode() {
           style={{
             display: "flex",
             justifyContent: "center",
-            gap: "10px",
+            gap: "60px",
             marginTop: "20px",
             marginBottom: "20px",
           }}
@@ -165,7 +173,7 @@ export default function VerificationCode() {
         <button
           type="submit"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -175,11 +183,12 @@ export default function VerificationCode() {
             lineHeight: "24px",
             borderRadius: "5px",
             color: "#fff",
-            background: click ? "#E22023" : "rgba(0,0,0,0.5)",
-            cursor: "pointer",
+            background: active ? "#E22023" : "rgba(0,0,0,0.5)",
+            cursor: active ? "pointer" : "not-allowed",
             transition: "background 0.25s ease",
           }}
           onClick={handleVerify}
+          disabled={!active}
         >
           Send Code
         </button>
