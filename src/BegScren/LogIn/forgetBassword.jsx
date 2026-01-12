@@ -1,11 +1,25 @@
 import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 export default function ForgetPassword() {
   const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const [email, setEmail] = useState("");
+
+
+
+   const [activ , setActive]=useState(false)
+ 
+  useEffect(() => {
+    // لما المستخدم يكتب إيميل وباسورد الاتنين مش فاضيين
+    if (email !== "" ) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [email]);
+
 
   const handleSendCode = async () => {
     if (!email) {
@@ -59,8 +73,8 @@ export default function ForgetPassword() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "70%",
+          width: "781px",
+          height: "659px",
           padding: "40px 33px",
           background: "#fff",
           borderRadius: "8px",
@@ -108,7 +122,7 @@ export default function ForgetPassword() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
             marginTop: "10px",
@@ -131,18 +145,14 @@ export default function ForgetPassword() {
             id="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{
-              padding: "10px",
-              border: "none",
-              outline: "none",
-            }}
-          />
+                     style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
+></input>
         </div>
 
         <button
           type="submit"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -152,7 +162,7 @@ export default function ForgetPassword() {
             lineHeight: "24px",
             borderRadius: "5px",
             color: "#fff",
-            background: click ? "#E22023" : "rgba(0,0,0,0.5)",
+            background: activ? "#E22023" : "rgba(0,0,0,0.5)",
           }}
           onClick={handleSendCode}
         >

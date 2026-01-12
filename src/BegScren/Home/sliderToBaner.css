@@ -3,14 +3,14 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px;
   
 }
 
 .sliderSimple-track {
   display: flex;
   width: fit-content;
-  gap: 50px; /* بدون مسافات */
+  gap: 60px; /* بدون مسافات */
 }
 
 .sliderSimple-item {

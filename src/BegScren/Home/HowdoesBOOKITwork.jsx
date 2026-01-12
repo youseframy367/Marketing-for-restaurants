@@ -9,7 +9,7 @@ export default function HowBOOKwork() {
   ];
 
   return (
-    <div style={{ width: "100%", marginTop:"50px", padding: "20px" }}>
+    <div style={{ width: "100%", marginTop:"70px", padding: "20px" }}>
       {/* العنوان */}
       <div>
         <p style={{
@@ -66,7 +66,8 @@ export default function HowBOOKwork() {
               lineHeight: '35px',
               fontFamily: "'Rubik', sans-serif",
               marginTop: "10px",
-              width:'100%'
+              width:'100%',
+              textAlign:'center'
               
             }}>
               {step.text}

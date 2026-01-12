@@ -17,7 +17,7 @@ export default function Banner() {
       style={{
         margin: '0px',
         width: "100%",
-        height: '70vh',
+        height: '80vh',
         display:"flex",
         flexDirection:'column',
         justifyContent:"space-between",
@@ -34,7 +34,7 @@ export default function Banner() {
 
 
   {/* أيقونات التواصل */}
-      <div style={{ display: "flex", alignItems: "center", marginTop: "50px" }}>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "70px" }}>
 <a
   href="https://www.facebook.com/share/1GK7wnD318/"
   target="_blank"
@@ -97,11 +97,11 @@ your taste
             </p>
             <p style={{
                 color:"#2C2F24",
-                fontSize:"20px",
+                fontSize:"18px",
                 lineHeight:"32px",
                 fontWeight:'400',
                 textAlign:'center',
-                marginTop:"10px",
+                marginTop:"25px",
           fontFamily: "'Poppins', sans-serif",
 
             }}>  Discover delectable cuisine and unforgettable <br/> moments in our welcoming, culinary haven.
@@ -159,7 +159,8 @@ your taste
     width: "150px",
     height: "150px",
     position: "relative",
-    marginTop: "-20px",
+          transform: "translateY(-40px)",
+
   }}
 >
   {/* الصورة في المنتصف */}

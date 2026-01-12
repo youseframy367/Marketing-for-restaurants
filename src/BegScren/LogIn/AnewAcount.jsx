@@ -1,11 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 export default function CreateNewAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [click, setClick] = useState(false);
+
+
+
+
+
+  const [activ , setActive]=useState(false)
+ 
+  useEffect(() => {
+    // لما المستخدم يكتب إيميل وباسورد الاتنين مش فاضيين
+    if (email !== "" && password !== "" && confirmPassword !== "") {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [email, password ,confirmPassword]);
+
+
+
+
+
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -60,8 +80,8 @@ export default function CreateNewAccount() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "auto",
+          width: "781px",
+          height: "659px",
           padding: "40px 33px",
           backgroundColor: "#fff",
           borderRadius: "8px",
@@ -109,7 +129,7 @@ export default function CreateNewAccount() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
             marginTop: "10px",
@@ -128,7 +148,7 @@ export default function CreateNewAccount() {
             id="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
           />
         </div>
 
@@ -137,7 +157,7 @@ export default function CreateNewAccount() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
           }}
@@ -154,7 +174,7 @@ export default function CreateNewAccount() {
             id="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
           />
         </div>
 
@@ -163,7 +183,7 @@ export default function CreateNewAccount() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
           }}
@@ -180,14 +200,14 @@ export default function CreateNewAccount() {
             id="ConfirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border:"solid 1px #D0D5DD",borderRadius:"8px",boxShadow: "0px 1px 2px 0px #1018280D", outline: "none" }}
           />
         </div>
 
         <button
           type="button"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -196,7 +216,7 @@ export default function CreateNewAccount() {
             fontSize: "16px",
             fontWeight: "500",
             borderRadius: "5px",
-            background: click ? "#E22023" : "rgba(0,0,0,0.5)",
+            background: activ ? "#E22023" : "rgba(0,0,0,0.5)",
           }}
           onClick={handleSubmit}
         >

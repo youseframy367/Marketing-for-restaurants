@@ -33,25 +33,10 @@ export default function MostBoked() {
   const [expandedIndexes, setExpandedIndexes] = useState([]);
   const previewLength = 250;
 
-  const toggleExpand = (index) => {
-    setExpandedIndexes((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
-    );
-  };
-
-  const toggleLick = (index) => {
-    setRated((prev) =>
-      prev.map((item, i) =>
-        i === index ? { ...item, lick: !item.lick } : item
-      )
-    );
-  };
 
   return (
     <div className="w-full" style={{
-        marginTop:'30px'
+        marginTop:'50px'
     }}>
       {/* العنوان والوصف */}
       <div className="flex flex-col items-center text-center gap-[10px]">
@@ -75,30 +60,38 @@ Discover the most popular dining spots and reserve your table today.        </p>
         zIndex:99,
         width:'30%',
         height:'100%',
-        background:'rgba(255, 119, 87, 0.1)'
+        background:'rgba(255, 119, 87, 0.1)',
+        borderRadius:"15px",
 
        }}>
             <div
               key={index}
               className="w-[100%] cursor-pointer "
+              style={{borderRadius:"15px"}}
               onClick={() => toggleExpand(index)}
             >
  
               <img
                 src={item.img}
                 alt={item.name}
-                className="w-full h-[200px] object-cover rounded-md"
+                style={{
+                  borderRadius:'15px 15px 3px 3px '
+                }}
+                className="w-full h-[200px] object-cover "
               />
 
               <p
                 className="mt-2 font-Poppins text-[#172432] text-[28px]"
-                style={{ fontWeight: "400" }}
+                style={{ fontWeight: "400", marginLeft:'10px' }}
               >
                 {item.name}
               </p>
 
               {/* النجوم */}
-              <div className="flex items-center mt-1">
+              <div className="flex items-center mt-1"
+              style={{
+                marginLeft:'10px',
+              }}>
                 {[1, 2, 3, 4, 5].map((star, idx) => (
                   <svg
                     key={idx}
@@ -112,22 +105,30 @@ Discover the most popular dining spots and reserve your table today.        </p>
                   </svg>
                 ))}
                 <span className="ml-2 text-sm text-gray-500">
-                  {(item.Relative * 5).toFixed(1)}
+                  {item.Relative }
                 </span>
               </div>
 
               {/* الوصف */}
-              <p className="mt-2 text-[14px] text-gray-700">
+              <p className="mt-2 text-[14px] text-gray-700" style={{
+                margin:'10px'
+              }}>
                 {isExpanded ? item.des : `${item.des.slice(0, previewLength)}...`}
               </p>
 
               {/* الزر والقلب */}
-              <div className="flex items-center justify-center gap-4 mt-4">
-                <button className="px-[30px] py-[15px] truncate rounded-[12px] text-[#FFFFFF] text-[26px] font-[500] bg-red-500 font-Poppins">
+              <div className="flex items-center justify-center gap-4 mt-4"
+              style={{
+                margin:'10px',
+              }}>
+                <button className="px-[30px] py-[15px] truncate rounded-[12px] text-[#FFFFFF] text-[23px] font-[500] bg-red-500 font-Poppins">
                   Restaurant Detail Page
                 </button>
                 <img
                   src={item.lick ? LickImg : disLickImg}
+                  style={{
+                    marginRight:'5px',
+                  }}
                   alt="like"
                   className="w-9 h-8 cursor-pointer"
                   onClick={(e) => {

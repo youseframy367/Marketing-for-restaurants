@@ -36,7 +36,7 @@ export default function RestaurantManagers() {
   ];
 
   return (
-    <div style={{ width: "100%", margin: 0, padding: "10px 20px" }}>
+    <div style={{ width: "100%", marginTop:'20px', padding: "10px 20px" }}>
       {/* ======= العنوان ======= */}
       <div>
         <p
@@ -80,7 +80,7 @@ export default function RestaurantManagers() {
           width: "600%",
           overflow: "hidden",
           gap: "10px",
-          marginTop: "40px",
+          marginTop: "60px",
         }}
       >
         <motion.div

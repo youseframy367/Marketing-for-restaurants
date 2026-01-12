@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 export default function LogAcount() {
   const navigate = useNavigate();
   const [click, setClick] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [activ , setActive]=useState(false)
+ 
+  useEffect(() => {
+    // لما المستخدم يكتب إيميل وباسورد الاتنين مش فاضيين
+    if (email !== "" && password !== "") {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [email, password]); // الكود ده هيتنفذ كل ما الإيميل أو الباسورد يتغيروا
   const handleLogin = async () => {
     if (!email || !password) {
       alert("Please enter both email and password");
@@ -61,9 +71,9 @@ export default function LogAcount() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "70%",
-          height: "auto",
-          padding: "40px 33px",
+          width: "781px",
+          height: "659px",
+          padding: "20px 15px",
           borderRadius: "8px",
           backgroundColor: "#fff",
           boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
@@ -112,7 +122,7 @@ export default function LogAcount() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
             marginBottom: "10px",
             marginTop: "10px",
@@ -131,7 +141,7 @@ export default function LogAcount() {
             id="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border: "none",border:"solid 1px #D0D5DD",boxShadow: "0px 1px 2px 0px #1018280D",borderRadius:"8px", outline: "none" }}
           />
         </div>
 
@@ -140,7 +150,7 @@ export default function LogAcount() {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "80%",
+            width: "90%",
             gap: "10px",
           }}
         >
@@ -156,7 +166,7 @@ export default function LogAcount() {
             id="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ padding: "10px", border: "none", outline: "none" }}
+            style={{ padding: "10px", border: "none",border:"solid 1px #D0D5DD",boxShadow: "0px 1px 2px 0px #1018280D",borderRadius:"8px", outline: "none" }}
           />
         </div>
 
@@ -164,7 +174,7 @@ export default function LogAcount() {
         <button
           type="submit"
           style={{
-            width: "80%",
+            width: "90%",
             padding: "10px 18px",
             border: "none",
             outline: "none",
@@ -173,7 +183,7 @@ export default function LogAcount() {
             fontWeight: "500",
             color: "#fff",
             borderRadius: "5px",
-            background: click ? "#BF360C" : "rgba(0,0,0,0.5)",
+            background: activ ? "#BF360C" : "rgba(0,0,0,0.5)",
           }}
           onClick={handleLogin}
         >
@@ -183,25 +193,33 @@ export default function LogAcount() {
         {/* Remember & Forgot Password */}
         <div
           style={{
-            width: "80%",
+            width: "90%",
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div
-            style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-          >
-            <input type="checkbox" />
-            <p
-              style={{
-                color: "#48505E",
-                fontSize: "14px",
-                fontWeight: "500",
-              }}
-            >
-              Remember for 30 days
-            </p>
-          </div>
+         <div
+  style={{
+    display: "flex",
+    gap: "15px",
+    flexDirection: "row",
+    alignItems: "center",
+  }}
+>
+  <input type="checkbox" id="activ" />
+  <label
+    htmlFor="activ"
+    style={{
+      color: "#48505E",
+      fontSize: "14px",
+      fontWeight: "500",
+      cursor: "pointer",
+    }}
+  >
+    Remember for 30 days
+  </label>
+</div>
+
           <p
             style={{
               color: "#BF360C",
@@ -223,7 +241,10 @@ export default function LogAcount() {
             fontWeight: "400",
             lineHeight: "125%",
             padding: "10px",
+            marginTop:"50px",
           }}
+                      onClick={() => navigate("/create-account")}
+
         >
           Don't have an account?{" "}
           <span
@@ -232,7 +253,6 @@ export default function LogAcount() {
               textDecoration: "underline",
               cursor: "pointer",
             }}
-            onClick={() => navigate("/create-account")}
           >
             SignUp
           </span>

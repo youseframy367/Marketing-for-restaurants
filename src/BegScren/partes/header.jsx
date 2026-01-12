@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [activeIndex, setActiveIndex] = useState(0); // العنصر النشط
   const menuItems = ["Home", "Most Booked", "Popular Dishes", "Liked Restaurants"];
-
+  const navigate=useNavigate()
   return (
     <>
       {/* الشريط العلوي */}
       <div
         style={{
-          width: "98%",
+          width: "100%",
           margin: "0px auto",
           fontFamily: "'Poppins', sans-serif",
           padding: "5px 10px",
@@ -205,6 +206,9 @@ export default function Header() {
               whiteSpace: "nowrap",
               cursor: "pointer",
               fontFamily: "'Cairo', sans-serif",
+            }}
+            onClick={()=>{
+              navigate("/login")
             }}
           >
             Sign In
