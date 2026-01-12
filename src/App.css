@@ -1,0 +1,22 @@
+body{
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+    -ms-overflow-style: none;
+    margin:0px;
+
+}
+
+
+
+/* لإخفاء الشريط في كل الصفحة */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* في فايرفوكس */
+html {
+  scrollbar-width: none;
+}
