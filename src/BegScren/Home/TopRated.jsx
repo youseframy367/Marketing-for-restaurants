@@ -3,8 +3,15 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import disLickImg from "/imgBegScren/heart 2.png";
 import LickImg from "/imgBegScren/Vector(5).png";
-
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Lick from "../partes/lick";
 export default function TopRated() {
+
+  const navigate=useNavigate()
+  const location=useLocation()
+
+
   const initialRated = [
     {
       img: "/imgBegScren/1b0852c875e12ebac96f9356263a8a41b6785601.png",
@@ -33,10 +40,19 @@ export default function TopRated() {
   const [expandedIndexes, setExpandedIndexes] = useState([]);
   const previewLength = 250;
 
-  
+
+// لتغيير حالة القلب
+const toggleLick = (index) => {
+  setRated((prev) =>
+    prev.map((item, i) =>
+      i === index ? { ...item, lick: !item.lick } : item
+    )
+  );
+};
+
 
   return (
-    <div className="w-full mt-[35px]" >
+    <div data-aos="fade-up" className="w-full mt-[35px]" >
       {/* العنوان والوصف */}
       <div className="flex flex-col items-center text-center gap-[10px]">
         <p className="font-Poppins text-[48px] font-[600] text-[#E22023] py-[20px]">
@@ -63,7 +79,9 @@ export default function TopRated() {
         height:'100%',
         background:'rgba(255, 119, 87, 0.1)',
                 borderRadius:'15px'
-       }}>
+       }}
+
+        >
             <div
               key={index}
               className="w-[100%] cursor-pointer "
@@ -78,11 +96,17 @@ export default function TopRated() {
                   borderRadius:'15px 15px 3px 3px '
                 }}
                 className="w-full h-[200px] object-cover "
+                                   onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
               />
 
               <p
                 className="mt-2 font-Poppins text-[#172432] text-[28px]"
                 style={{ fontWeight: "400" ,margin:"10px" }}
+                   onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
               >
                 {item.name}
               </p>
@@ -111,29 +135,27 @@ export default function TopRated() {
               {/* الوصف */}
               <p className="mt-2 text-[14px] text-gray-700" style={{
                 margin:'10px',
-              }}>
+              }}
+                               onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
+              >
                 {isExpanded ? item.des : `${item.des.slice(0, previewLength)}...`}
               </p>
 
               {/* الزر والقلب */}
               <div className="flex items-center justify-center gap-4 mt-4" style={{
-                margin:"10px"
+                margin:"10px",zIndex:999
               }}>
-                <button className="px-[30px] py-[15px] rounded-[12px] text-[#FFFFFF] text-[23px] truncate  font-[500] bg-red-500 font-Poppins">
+                <button className="px-[30px] py-[15px] rounded-[12px] text-[#FFFFFF] text-[23px] truncate  font-[500] bg-red-500 font-Poppins"
+                
+                   onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
+                >
                   Restaurant Detail Page
                 </button>
-                <img
-                  src={item.lick ? LickImg : disLickImg}
-                  alt="like"
-                  className="w-9 h-8 cursor-pointer"
-                  style={{
-                    marginRight:"5px"
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation(); // تمنع توسيع النص عند الضغط على القلب
-                    toggleLick(index);
-                  }}
-                />
+               <Lick/>
               </div>
             </div>
             </div>

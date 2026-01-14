@@ -1,10 +1,13 @@
 "use client";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import disLickImg from "/imgBegScren/heart 2.png";
-import LickImg from "/imgBegScren/Vector(5).png";
-
+import Lick from "../partes/lick";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 export default function MostBoked() {
+  
+    const navigate=useNavigate()
+    const location=useLocation()
   const initialRated = [
     {
       img: "/imgBegScren/1b0852c875e12ebac96f9356263a8a41b6785601.png",
@@ -33,9 +36,16 @@ export default function MostBoked() {
   const [expandedIndexes, setExpandedIndexes] = useState([]);
   const previewLength = 250;
 
-
+// لتغيير حالة القلب
+const toggleLick = (index) => {
+  setRated((prev) =>
+    prev.map((item, i) =>
+      i === index ? { ...item, lick: !item.lick } : item
+    )
+  );
+};
   return (
-    <div className="w-full" style={{
+    <div data-aos="fade-up" className="w-full" style={{
         marginTop:'50px'
     }}>
       {/* العنوان والوصف */}
@@ -78,11 +88,17 @@ Discover the most popular dining spots and reserve your table today.        </p>
                   borderRadius:'15px 15px 3px 3px '
                 }}
                 className="w-full h-[200px] object-cover "
+                  onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
               />
 
               <p
                 className="mt-2 font-Poppins text-[#172432] text-[28px]"
                 style={{ fontWeight: "400", marginLeft:'10px' }}
+                  onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
               >
                 {item.name}
               </p>
@@ -91,7 +107,12 @@ Discover the most popular dining spots and reserve your table today.        </p>
               <div className="flex items-center mt-1"
               style={{
                 marginLeft:'10px',
-              }}>
+              }}
+              
+                onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
+              >
                 {[1, 2, 3, 4, 5].map((star, idx) => (
                   <svg
                     key={idx}
@@ -104,7 +125,12 @@ Discover the most popular dining spots and reserve your table today.        </p>
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.966a1 1 0 00.95.69h4.167c.969 0 1.371 1.24.588 1.81l-3.375 2.454a1 1 0 00-.364 1.118l1.286 3.966c.3.921-.755 1.688-1.54 1.118l-3.375-2.454a1 1 0 00-1.176 0l-3.375 2.454c-.784.57-1.838-.197-1.539-1.118l1.285-3.966a1 1 0 00-.364-1.118L2.038 9.393c-.783-.57-.38-1.81.588-1.81h4.167a1 1 0 00.951-.69l1.285-3.966z" />
                   </svg>
                 ))}
-                <span className="ml-2 text-sm text-gray-500">
+                <span className="ml-2 text-sm text-gray-500"
+                  onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
+                
+                >
                   {item.Relative }
                 </span>
               </div>
@@ -112,7 +138,11 @@ Discover the most popular dining spots and reserve your table today.        </p>
               {/* الوصف */}
               <p className="mt-2 text-[14px] text-gray-700" style={{
                 margin:'10px'
-              }}>
+              }}
+                onClick={() =>
+  navigate("/detalisRestaurant", { state: { data: item } })
+}
+              >
                 {isExpanded ? item.des : `${item.des.slice(0, previewLength)}...`}
               </p>
 
@@ -124,18 +154,7 @@ Discover the most popular dining spots and reserve your table today.        </p>
                 <button className="px-[30px] py-[15px] truncate rounded-[12px] text-[#FFFFFF] text-[23px] font-[500] bg-red-500 font-Poppins">
                   Restaurant Detail Page
                 </button>
-                <img
-                  src={item.lick ? LickImg : disLickImg}
-                  style={{
-                    marginRight:'5px',
-                  }}
-                  alt="like"
-                  className="w-9 h-8 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation(); // تمنع توسيع النص عند الضغط على القلب
-                    toggleLick(index);
-                  }}
-                />
+                  <Lick/>
               </div>
             </div>
             </div>

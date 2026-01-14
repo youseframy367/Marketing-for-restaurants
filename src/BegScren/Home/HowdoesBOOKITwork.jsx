@@ -9,7 +9,7 @@ export default function HowBOOKwork() {
   ];
 
   return (
-    <div style={{ width: "100%", marginTop:"70px", padding: "20px" }}>
+    <div data-aos="fade-up" style={{ width: "100%", marginTop:"70px", padding: "20px" }}>
       {/* العنوان */}
       <div>
         <p style={{
@@ -21,7 +21,11 @@ export default function HowBOOKwork() {
         }}>
           How does BOOK IT work?
         </p>
-        <hr style={{
+        <hr
+        data-aos="fade-right"
+
+        
+        style={{
           width: "350px",
           height: "3px",
           background: "#E22023",

@@ -29,7 +29,7 @@ export default function SlideSimple() {
   };
 
   return (
-    <div className="sliderSimple-section">
+    <div data-aos="fade-up" className="sliderSimple-section">
       <motion.div className="sliderSimple-track" variants={sliderVariants} animate="animate">
         {[...items, ...items].map((item, index) => (
           <div key={index} className="sliderSimple-item">

@@ -1,6 +1,9 @@
 
 import { useState } from "react";
+
 export default function   OurBlog (){
+
+
 
  
 
@@ -12,7 +15,7 @@ From a management perspective, these systems provide a clear overview of daily r
 
 
     return(
-        < div style={{
+        < div data-aos="fade-up" style={{
             width:"100%",
             margin:'0px',
             padding:'20px',
@@ -29,6 +32,7 @@ fontWeight:'400',
     Our Blog
 </p>
 <hr
+data-aos="fade-right"
   style={{
     width: "150px",
     height: "3px",

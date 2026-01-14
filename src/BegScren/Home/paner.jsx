@@ -34,7 +34,7 @@ export default function Banner() {
 
 
   {/* أيقونات التواصل */}
-      <div style={{ display: "flex", alignItems: "center", marginTop: "70px" }}>
+      <div data-aos="fade-up"  style={{ display: "flex", alignItems: "center", marginTop: "70px" }}>
 <a
   href="https://www.facebook.com/share/1GK7wnD318/"
   target="_blank"
@@ -82,7 +82,10 @@ justifyContent:"center",
 alignItems:'center',
 marginTop:"-20px"       
  }}>
-        <p style={{
+        <p
+        data-aos="fade-up"
+        
+        style={{
             color:'#2C2F24',
             fontWeight:"400",
             fontSize:"100px",
@@ -95,7 +98,9 @@ your taste
 
 
             </p>
-            <p style={{
+            <p
+            data-aos="fade-up"
+            style={{
                 color:"#2C2F24",
                 fontSize:"18px",
                 lineHeight:"32px",
@@ -107,6 +112,7 @@ your taste
             }}>  Discover delectable cuisine and unforgettable <br/> moments in our welcoming, culinary haven.
             </p>
      <button
+     data-aos="fade-up"
   style={{
     fontWeight: "600",
     fontSize: "16px",
@@ -155,6 +161,7 @@ your taste
 
 
             <div
+            data-aos="fade-up"
   style={{
     width: "150px",
     height: "150px",

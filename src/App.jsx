@@ -8,9 +8,20 @@ import NewBassword from "./BegScren/LogIn/creatNewBassword";
 import CreatNewAcount from "./BegScren/LogIn/AnewAcount";
 import VerificationCodeNewAcount from "./BegScren/LogIn/Verification_newAcount";
 import Home from "./BegScren/Home/home";
+import DetailsRestaurant from "./BegScren/Home/detalsRestaurant";
 import "./App.css";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // مدة الأنيميشن بالملي ثانية
+      once: false, // الأنيميشن يحصل مرة واحدة فقط عند التمرير
+    });
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -22,6 +33,7 @@ function App() {
         <Route path="/new-password" element={<NewBassword />} />
         <Route path="/create-account" element={<CreatNewAcount />} />
         <Route path="/verificationNewAcount" element={<VerificationCodeNewAcount/>}/>
+        <Route path="/detalisRestaurant" element={<DetailsRestaurant/>}/>
       </Routes>
     </Router>
   );
